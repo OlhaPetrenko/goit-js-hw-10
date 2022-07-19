@@ -16,5 +16,34 @@ body {
   font: inherit;
   padding: 8px;
   max-width: 320px;
-  margin-bottom: 16px;
+  margin: 40px 0 0 40px;
+}
+.country-item,
+.country-card {
+  display: flex;
+}
+
+.country-item img,
+.country-card img {
+  margin-right: 20px;
+  height: 55px;
+}
+
+.country-name {
+  font-size: 18px;
+}
+.country-info {
+  margin: 20px 0 0 40px;
+}
+.country-text {
+  font-size: 20px;
+  font-weight: 700;
+}
+.country-date {
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 10px;
+}
+.country-item {
+  margin-bottom: 10px;
 }
