@@ -6,6 +6,7 @@ export function creatCountryMarkup(country) {
         src='${country[0].flags.svg}'
         alt="country flag"
         width="60"
+        height: "30"    
     />
     <h2 class="country-name">${country[0].name.official}</h2>
 
@@ -29,6 +30,7 @@ export function creatCountriesMarkup(countries) {
         src='${country.flags.svg}'
         alt="country flag"
         width="40"
+        height: "25"        
     />
     <h2 class="country-name">${country.name.official}</h2>
 

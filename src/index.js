@@ -15,50 +15,44 @@ const countryInfoEl = document.querySelector('.country-info');
 const countryListEl = document.querySelector('.country-list');
 // console.log(countryInfoEl);
 
-inputEl.addEventListener('input', debounce(onInputChangh, 300));
+inputEl.addEventListener('input', debounce(onInputChangh, DEBOUNCE_DELAY));
 
 function onInputChangh(event) {
   //   console.log(event.target.value.trim());
-
+  if (event.target.value.trim() === '') {
+    Notify.warning('Відсутня інформація для пошуку');
+    clearMarkup();
+  }
   fetchCountries(event.target.value.trim())
     .then(data => {
       console.log(data);
-      if (event.target.value.trim() === '') {
-        countryListEl.innerHTML = '';
-        countryInfoEl.innerHTML = '';
-        return alert('Відсутня інформація для пошуку');
-      }
+
       if (data.length > 10) {
-        countryListEl.innerHTML = '';
-        countryInfoEl.innerHTML = '';
+        clearMarkup();
         Notify.info(
           'Забагато позицій знайдено. Будь ласка, введіть назву країни точніше!'
         );
       } else if (data.length > 2 && data.length <= 10) {
-        countryListEl.innerHTML = '';
-        countryInfoEl.innerHTML = '';
+        clearMarkup();
         const countriesMarkup = creatCountriesMarkup(data);
-
-        // console.log(countriesMarkup);
-
         countryListEl.insertAdjacentHTML('beforeend', countriesMarkup);
       } else {
-        countryListEl.innerHTML = '';
-        countryInfoEl.innerHTML = '';
+        clearMarkup();
         const countryMarkup = creatCountryMarkup(data);
-
-        // console.log(countryMarkup);
-
         countryInfoEl.insertAdjacentHTML('beforeend', countryMarkup);
       }
     })
     .catch(err => {
-      if (err.message === '404') {
+      if ((err.message === '404') & (event.target.value.trim() !== '')) {
         Notify.failure('Упс, немає країни з такою назвою!!!');
-        countryListEl.innerHTML = '';
-        countryInfoEl.innerHTML = '';
+        clearMarkup();
       }
 
       console.dir(err);
     });
+}
+
+function clearMarkup() {
+  countryListEl.innerHTML = '';
+  countryInfoEl.innerHTML = '';
 }

@@ -21,12 +21,13 @@ body {
 .country-item,
 .country-card {
   display: flex;
+  align-items: center;
 }
 
 .country-item img,
 .country-card img {
   margin-right: 20px;
-  height: 55px;
+  height: 35px;
 }
 
 .country-name {
